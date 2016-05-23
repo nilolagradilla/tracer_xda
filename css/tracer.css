@@ -1,0 +1,35 @@
+#ma{
+	position: absolute;
+	margin-left: 300px;
+	margin-right: 100px;
+	margin-top: -511px;
+
+}
+
+#pi{
+	position: absolute;
+	margin-left: 600px;
+	margin-right: 100px;
+	margin-top: -511px;
+}
+
+#ci{
+	position: absolute;
+	margin-left: 300px;
+	margin-right: 100px;
+	margin-top: -530px;
+}
+
+#se{
+	position: absolute;
+	margin-left: 300px;
+	margin-right: 100px;
+	margin-top: -411px;
+}
+
+#pop{
+	position: absolute;
+	margin-left: 0px;
+	margin-right: 100px;
+	margin-top: 175px;
+}
