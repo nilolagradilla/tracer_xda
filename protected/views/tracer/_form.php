@@ -480,66 +480,6 @@
     ),
 ));?> 
 
-<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'employment-history-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-)); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($employmentHistory); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($employmentHistory,'position'); ?>
-		<?php echo $form->textField($employmentHistory,'position',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->error($employmentHistory,'position'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($employmentHistory,'inclusivePeriod'); ?>
-		<?php echo $form->textField($employmentHistory,'inclusivePeriod',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->error($employmentHistory,'inclusivePeriod'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($employmentHistory,'relatedToAcademic'); ?>
-		<?php echo $form->textField($employmentHistory,'relatedToAcademic'); ?>
-		<?php echo $form->error($employmentHistory,'relatedToAcademic'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($employmentHistory,'companyAddress'); ?>
-		<?php echo $form->textArea($employmentHistory,'companyAddress',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($employmentHistory,'companyAddress'); ?>
-	</div>
-
-	<?php
-		echo CHtml::ajaxSubmitButton(
-		    'Submit',
-		    Yii::app()->createUrl('/tracer/addemploymentHistory',array('scholar_id'=>$model->scholarId)),
-		    array(
-		         'update'=>'#employmentHistory-grid',
-		        'complete'=>"function(data)
-		        {
-		        	setTimeout(\"$('#emphist').dialog('close')\");
-		        }",
-		    ),
-		    array(
-		        'class'=>'btn btn-success',
-		        
-		    )
-		);
-		?>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- form -->
 
 <?php $this->endWidget(); ?>
 
@@ -780,6 +720,8 @@
 
 <?php $this->endWidget(); ?>
 
+
+
 <script type="text/javascript">
 function addContact()
 {
@@ -812,6 +754,46 @@ function addContact()
              }',
 			 'error'=>"function(request, status, error){
 				 	$('#dialogContact').html(status+'('+error+')'+': '+ request.responseText );
+					}",
+			
+            ))?>;
+    return false; 
+}
+
+</script>
+
+<script type="text/javascript">
+function addemploymentHistory()
+{
+	<?php echo CHtml::ajax(array(
+			'url'=>$this->createUrl('employmentHistory/create',array('id'=>1)),
+			'data'=> "js:$(this).serialize()",
+            'type'=>'post',
+            'dataType'=>'json',
+            'success'=>"function(data)
+            {
+                if (data.status == 'failure')
+                {
+                    $('#emphist').html(data.div);
+                    // Here is the trick: on submit-> once again this function!
+                    $('#emphist form').submit(addemploymentHistory);
+                }
+                else
+                {
+                    $.fn.yiiGridView.update('employmentHistory-grid');
+					$('#emphist').html(data.div);
+                    setTimeout(\"$('#emphist').dialog('close') \",1000);
+					
+                }
+ 
+            }",
+			'beforeSend'=>'function(jqXHR, settings){
+                    $("#emphist").html(
+						\'<div class="loader"><br\><br\>Generating form.<br\> Please wait...</div>\'
+					);
+             }',
+			 'error'=>"function(request, status, error){
+				 	$('#emphist').html(status+'('+error+')'+': '+ request.responseText );
 					}",
 			
             ))?>;

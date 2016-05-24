@@ -60,23 +60,47 @@ class EmploymentHistoryController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
+
 	public function actionCreate()
 	{
 		$model=new EmploymentHistory;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		
+		if(isset($_GET['id']))
+		{
+			$scholar_id = $_GET['id'];
+		}	
 
 		if(isset($_POST['EmploymentHistory']))
 		{
 			$model->attributes=$_POST['EmploymentHistory'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+									
+			if($model->save()){
+				//$this->redirect(array('view','id'=>$model->id));
+				if (Yii::app()->request->isAjaxRequest)
+                {
+                    echo CJSON::encode(array(
+                        'status'=>'success', 
+                        'div'=>"successfully added"
+                        ));
+                    exit;               
+                }
+                else
+                    $this->redirect(array('view','id'=>$model->id));
+			}
 		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		
+		if (Yii::app()->request->isAjaxRequest)
+        {
+            echo CJSON::encode(array(
+                'status' => 'failure',
+                'div'=>$this->renderPartial('_form', array('model'=>$model, 'scholar_id'=>$scholar_id) ,true , true)));
+            exit;               
+        }else{
+            $this->render('create',array('model'=>$model,));
+        }
 	}
 
 	/**

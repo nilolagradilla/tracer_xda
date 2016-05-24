@@ -23309,3 +23309,21 @@ REQUEST_URI=/tracer/index.php/tracer/update/1
 in C:\xampp\htdocs\tracer\protected\views\tracer\_form.php (103)
 in C:\xampp\htdocs\tracer\protected\views\tracer\update.php (21)
 in C:\xampp\htdocs\tracer\protected\controllers\TracerController.php (318)
+2016/05/24 04:53:54 [warning] [application] Failed to set unsafe attribute "id" of "Tracer".
+in C:\xampp\htdocs\tracer\protected\controllers\TracerController.php (79)
+in C:\xampp\htdocs\tracer\index.php (14)
+2016/05/24 05:06:36 [warning] [application] Failed to set unsafe attribute "id" of "Tracer".
+in C:\xampp\htdocs\tracer\protected\controllers\TracerController.php (79)
+in C:\xampp\htdocs\tracer\index.php (14)
+2016/05/24 05:09:31 [warning] [application] Failed to set unsafe attribute "id" of "Tracer".
+in C:\xampp\htdocs\tracer\protected\controllers\TracerController.php (79)
+in C:\xampp\htdocs\tracer\index.php (14)
+2016/05/24 05:10:23 [warning] [application] Failed to set unsafe attribute "id" of "Tracer".
+in C:\xampp\htdocs\tracer\protected\controllers\TracerController.php (79)
+in C:\xampp\htdocs\tracer\index.php (14)
+2016/05/24 05:11:27 [warning] [application] Failed to set unsafe attribute "id" of "Tracer".
+in C:\xampp\htdocs\tracer\protected\controllers\TracerController.php (79)
+in C:\xampp\htdocs\tracer\index.php (14)
+2016/05/24 05:14:15 [warning] [application] Failed to set unsafe attribute "id" of "Tracer".
+in C:\xampp\htdocs\tracer\protected\controllers\TracerController.php (79)
+in C:\xampp\htdocs\tracer\index.php (14)

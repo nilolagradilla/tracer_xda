@@ -1,5 +1,5 @@
 <?php
-// error_reporting("~NOTICE");
+ error_reporting("~NOTICE");
 
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/../yii-1.1.17/framework/yii.php';
