@@ -364,7 +364,7 @@
 <?php echo CHtml::link('ADD', "",  // the link for open the dialog
     array(
         'style'=>'cursor: pointer; text-decoration: underline;',
-        'onclick'=>"$('#emphist').dialog('open');",
+         'onclick'=>"js:{addemploymentHistory(); $('#emphist').dialog('open'); }",
         'class'=>'btn btn-success'
 
         ));?>
@@ -372,6 +372,7 @@
 <div id="employmentHistory-grid">
 	<?php $this->renderPartial('_employmentHistory_grid', array('empHist'=>$empHist)); ?>
 </div>
+
 
  
 <!-- - - - - - - - - - - - - - - -  - - - - - - - - - - - Professional Affiliation- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
