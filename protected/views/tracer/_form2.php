@@ -29,147 +29,141 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-<div class='row-fluid'>
-	<div class='span12'>
-		<div class='span4'>
+	<h4>PERSONAL INFORMATION</h4>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'lastName'); ?>
+		<?php echo $form->textField($model,'lastName',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->error($model,'lastName'); ?>
+	</div>
 
-			<h4>PERSONAL INFORMATION</h4>
+	<div class="row">
+		<?php echo $form->labelEx($model,'firstName'); ?>
+		<?php echo $form->textField($model,'firstName',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->error($model,'firstName'); ?>
+	</div>
 
-			<div class="row">
-				<?php echo $form->labelEx($model,'lastName'); ?>
-				<?php echo $form->textField($model,'lastName',array('size'=>60,'maxlength'=>100)); ?>
-				<?php echo $form->error($model,'lastName'); ?>
-			</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'middleName'); ?>
+		<?php echo $form->textField($model,'middleName',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->error($model,'middleName'); ?>
+	</div>
 
-			<div class="row">
-				<?php echo $form->labelEx($model,'firstName'); ?>
-				<?php echo $form->textField($model,'firstName',array('size'=>60,'maxlength'=>100)); ?>
-				<?php echo $form->error($model,'firstName'); ?>
-			</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'nameSuffix'); ?>
+		<?php echo $form->textField($model,'nameSuffix',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->error($model,'nameSuffix'); ?>
+	</div>
 
-			<div class="row">
-				<?php echo $form->labelEx($model,'middleName'); ?>
-				<?php echo $form->textField($model,'middleName',array('size'=>60,'maxlength'=>100)); ?>
-				<?php echo $form->error($model,'middleName'); ?>
-			</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'sex'); ?>
+		<?php echo $form->dropDownList($model,'sex', array("1"=>"Male","2"=>"Female")); ?>
+		<?php echo $form->error($model,'sex'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'dateOfBirth'); 
+		$this->widget('zii.widgets.jui.CJuiDatePicker',
+		array(
+				'attribute'=>'dateOfBirth',
+				'name'=>'dateOfBirth',
+				'value'=>$model->dateOfBirth,
+				'model'=>$model,
 
-			<div class="row">
-				<?php echo $form->labelEx($model,'nameSuffix'); ?>
-				<?php echo $form->textField($model,'nameSuffix',array('size'=>10,'maxlength'=>10)); ?>
-				<?php echo $form->error($model,'nameSuffix'); ?>
-			</div>
+				'options'=>array(
+									'showAnim'=>'slide',
+									'showButtonPanel'=>true,
+									'dateFormat'=>'yy-m-d',
+									'showOn'=>'button', // 'focus', 'button', 'both'
+       								'buttonText'=>Yii::t('ui','Select form calendar'),
+       								'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.gif',
+    							    'buttonImageOnly'=>true,
+								),
+					'htmlOptions'=>array('style'=>''),
+				)) ?>
+		<?php echo $form->error($model,'dateOfBirth'); ?>
+	</div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - -  radio button - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<div class="row">
+		<?php echo $form->labelEx($model,'civilStatus'); ?>
 
-			<div class="row">
-				<?php echo $form->labelEx($model,'sex'); ?>
-				<?php echo $form->dropDownList($model,'sex', array("1"=>"Male","2"=>"Female")); ?>
-				<?php echo $form->error($model,'sex'); ?>
-			</div>
-			
-			<div class="row">
-				<?php echo $form->labelEx($model,'dateOfBirth'); 
-				$this->widget('zii.widgets.jui.CJuiDatePicker',
-				array(
-						'attribute'=>'dateOfBirth',
-						'name'=>'dateOfBirth',
-						'value'=>$model->dateOfBirth,
-						'model'=>$model,
-
-						'options'=>array(
-											'showAnim'=>'slide',
-											'showButtonPanel'=>true,
-											'dateFormat'=>'yy-m-d',
-											'showOn'=>'button', // 'focus', 'button', 'both'
-		       								'buttonText'=>Yii::t('ui','Select form calendar'),
-		       								'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.gif',
-		    							    'buttonImageOnly'=>true,
-										),
-							'htmlOptions'=>array('style'=>''),
-						)) ?>
-				<?php echo $form->error($model,'dateOfBirth'); ?>
-			</div>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - -  radio button - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-			<div class="row">
-				<?php echo $form->labelEx($model,'civilStatus'); ?>
-
-				<div class="compactRadioButton">
-				<?php echo $form->radioButtonList($model,'civilStatus', array("1"=>"Single", "2"=>"Married", "3"=>"Divorced", "4"=>"Widowed"), array('separator'=>' ','labelOptions'=>array('style'=>'display:inline'))); ?>
-				</div>
-
-				<?php echo $form->error($model,'civilStatus'); ?>
-			</div>
-		</div>	
-
-		<div class='span4'>
-			<h4>MAILING ADDRESS</h4>
-
-			<div class="row">
-				<?php echo $form->labelEx($address,'Municipality *'); ?>
-
-				<?php
-				$this->widget('ext.select2.ESelect2',array(
-					  'model'=>$address,
-					  'attribute'=>'municipalityId',
-					  'data'=>MunicipalityCity::listDataCity(),
-					  'options'=>array(
-							'width'=>'265px',
-							'allowClear'=>true,
-							'placeholder'=>'Please select...',
-							),
-					));
-				?>
-				<?php echo $form->error($address,'municipalityId'); ?>
-			</div>
-
-
-			<div class="row">
-				<?php echo $form->labelEx($address,'Barangay *'); ?>
-
-				<?php
-				$this->widget('ext.select2.ESelect2',array(
-					  'model'=>$address,
-					  'attribute'=>'barangayId',
-					  'data'=>Barangay::listDataBarangay(),
-					  'options'=>array(
-							'width'=>'265px',
-							'allowClear'=>true,
-							'placeholder'=>'Please select...',
-							),
-					));
-				?>
-					<?php echo $form->error($address,'barangayId'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($address,'houseNo'); ?>
-				<?php echo $form->textArea($address,'houseNo',array('size'=>60,'maxlength'=>250)); ?>
-				<?php echo $form->error($address,'houseNo'); ?>
-			</div>
-
+		<div class="compactRadioButton">
+		<?php echo $form->radioButtonList($model,'civilStatus', array("1"=>"Single", "2"=>"Married", "3"=>"Divorced", "4"=>"Widowed"), array('separator'=>' ','labelOptions'=>array('style'=>'display:inline'))); ?>
 		</div>
 
-		<div class='span4'>
-			<h4>PARENTS INFORMATION</h4>
+		<?php echo $form->error($model,'civilStatus'); ?>
+	</div>
 
-			<div class="row">
-				<?php echo $form->labelEx($model,'father'); ?>
-				<?php echo $form->textField($model,'father',array('size'=>60,'maxlength'=>250)); ?>
-				<?php echo $form->error($model,'father'); ?>
-			</div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -Address dropDown - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-			<div class="row">
-				<?php echo $form->labelEx($model,'mother'); ?>
-				<?php echo $form->textField($model,'mother',array('size'=>60,'maxlength'=>250)); ?>
-				<?php echo $form->error($model,'mother'); ?>
-			</div>
+<div id='ma'>
+	<h4>MAILING ADDRESS</h4>
 
-			<div class="row">
-				<?php echo $form->labelEx($model,'addressParents'); ?>
-				<?php echo $form->textArea($model,'addressParents',array('rows'=>6, 'cols'=>50)); ?>
-				<?php echo $form->error($model,'addressParents'); ?>
-			</div>
-		</div>
+	<div class="row">
+		<?php echo $form->labelEx($address,'Municipality *'); ?>
 
+		<?php
+		$this->widget('ext.select2.ESelect2',array(
+			  'model'=>$address,
+			  'attribute'=>'municipalityId',
+			  'data'=>MunicipalityCity::listDataCity(),
+			  'options'=>array(
+					'width'=>'265px',
+					'allowClear'=>true,
+					'placeholder'=>'Please select...',
+					),
+			));
+		?>
+		<?php echo $form->error($address,'municipalityId'); ?>
+	</div>
+
+
+	<div class="row">
+		<?php echo $form->labelEx($address,'Barangay *'); ?>
+
+		<?php
+		$this->widget('ext.select2.ESelect2',array(
+			  'model'=>$address,
+			  'attribute'=>'barangayId',
+			  'data'=>Barangay::listDataBarangay(),
+			  'options'=>array(
+					'width'=>'265px',
+					'allowClear'=>true,
+					'placeholder'=>'Please select...',
+					),
+			));
+		?>
+			<?php echo $form->error($address,'barangayId'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($address,'houseNo'); ?>
+		<?php echo $form->textArea($address,'houseNo',array('size'=>60,'maxlength'=>250)); ?>
+		<?php echo $form->error($address,'houseNo'); ?>
+	</div>
+
+</div>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<div id='pi'>
+	<h4>PARENTS INFORMATION</h4>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'father'); ?>
+		<?php echo $form->textField($model,'father',array('size'=>60,'maxlength'=>250)); ?>
+		<?php echo $form->error($model,'father'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'mother'); ?>
+		<?php echo $form->textField($model,'mother',array('size'=>60,'maxlength'=>250)); ?>
+		<?php echo $form->error($model,'mother'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'addressParents'); ?>
+		<?php echo $form->textArea($model,'addressParents',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($model,'addressParents'); ?>
 	</div>
 </div>
 
@@ -189,82 +183,84 @@
 	<?php $this->renderPartial('_contact_grid', array('schontact'=>$schontact)); ?>
 </div>
 
+
+	
 <!-- - - - - - - - - - - -  - - - - - - - - - -  - - - Dropdown Scholarship - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-<div class='row-fluid'>
-	<div class='span12'>
-		<div class='span4'>
+<h4> SCHOLARSHIP INFORMATION</h4> 
 
-	<h4> SCHOLARSHIP INFORMATION</h4> 
+	<div class="row">
+		<?php echo $form->labelEx($model,'Scholarship Program *'); ?>
+		<?php echo $form->dropDownList($model,'scholarId', scholarshipCategory::listDataCat()); ?>
+	</div>
+<!-- - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-		<div class="row">
-			<?php echo $form->labelEx($model,'Scholarship Program *'); ?>
-			<?php echo $form->dropDownList($model,'scholarId', scholarshipCategory::listDataCat()); ?>
-		</div>
-	<!-- - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<div class="row">
+		<?php echo $form->labelEx($model,'yearGraduated'); ?>
+		<?php echo $form->textField($model,'yearGraduated'); ?>
+		<?php echo $form->error($model,'yearGraduated'); ?>
+	</div>
 
-		<div class="row">
-			<?php echo $form->labelEx($model,'yearGraduated'); ?>
-			<?php echo $form->textField($model,'yearGraduated'); ?>
-			<?php echo $form->error($model,'yearGraduated'); ?>
-		</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'School/University *'); ?>
+		<?php echo $form->dropDownList($model,'scholarId', school::listDataSchool()); ?>
+	</div>
 
-		<div class="row">
-			<?php echo $form->labelEx($model,'School/University *'); ?>
-			<?php echo $form->dropDownList($model,'scholarId', school::listDataSchool()); ?>
-		</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'Course *'); ?>
+		<?php echo $form->dropDownList($model,'scholarId', course::listDataCourse()); ?>
+	</div>
 
-		<div class="row">
-			<?php echo $form->labelEx($model,'Course *'); ?>
-			<?php echo $form->dropDownList($model,'scholarId', course::listDataCourse()); ?>
-		</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'awardsHonors'); ?>
+		<?php echo $form->dropDownList($model,'awardsHonors', array("1"=>"Summa Cum Laude","2"=>"Magna Cum Laude", "3"=>"Cum Laude")); ?>
+		<?php echo $form->error($model,'awardsHonors'); ?>
+	</div>
 
-		<div class="row">
-			<?php echo $form->labelEx($model,'awardsHonors'); ?>
-			<?php echo $form->dropDownList($model,'awardsHonors', array("1"=>"Summa Cum Laude","2"=>"Magna Cum Laude", "3"=>"Cum Laude")); ?>
-			<?php echo $form->error($model,'awardsHonors'); ?>
-		</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'dateAccomplished'); 
+		$this->widget('zii.widgets.jui.CJuiDatePicker',
+		array(
+				'attribute'=>'dateAccomplished',
+				'name'=>'dateAccomplished',
+				'value'=>$model->dateAccomplished,
+				'model'=>$model,
 
-		<div class="row">
-			<?php echo $form->labelEx($model,'dateAccomplished'); 
-			$this->widget('zii.widgets.jui.CJuiDatePicker',
-			array(
-					'attribute'=>'dateAccomplished',
-					'name'=>'dateAccomplished',
-					'value'=>$model->dateAccomplished,
-					'model'=>$model,
+				'options'=>array(
+									'showAnim'=>'slide',
+									'showButtonPanel'=>true,
+									'dateFormat'=>'yy-m-d',
+								),
+					'htmlOptions'=>array('style'=>''),
+				)) ?>
+		<?php echo $form->error($model,'dateAccomplished'); ?>
+	</div>
 
-					'options'=>array(
-										'showAnim'=>'slide',
-										'showButtonPanel'=>true,
-										'dateFormat'=>'yy-m-d',
-									),
-						'htmlOptions'=>array('style'=>''),
-					)) ?>
-			<?php echo $form->error($model,'dateAccomplished'); ?>
-		</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'entryDate'); 
+		$this->widget('zii.widgets.jui.CJuiDatePicker',
+		array(
+				'attribute'=>'entryDate',
+				'name'=>'entryDate',
+				'value'=>$model->entryDate,
+				'model'=>$model,
 
-		<div class="row">
-			<?php echo $form->labelEx($model,'entryDate'); 
-			$this->widget('zii.widgets.jui.CJuiDatePicker',
-			array(
-					'attribute'=>'entryDate',
-					'name'=>'entryDate',
-					'value'=>$model->entryDate,
-					'model'=>$model,
+				'options'=>array(
+									'showAnim'=>'slide',
+									'showButtonPanel'=>true,
+									'dateFormat'=>'yy-m-d',
+								),
+					'htmlOptions'=>array('style'=>''),
+				)) ?>
+		<?php echo $form->error($model,'entryDate'); ?>
+	</div>
 
-					'options'=>array(
-										'showAnim'=>'slide',
-										'showButtonPanel'=>true,
-										'dateFormat'=>'yy-m-d',
-									),
-						'htmlOptions'=>array('style'=>''),
-					)) ?>
-			<?php echo $form->error($model,'entryDate'); ?>
-		</div>
-			</div>
 
-	<div class='span4'>
+
+
+<!-- - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - Employment - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<div id='ci'>
  
 	<h4> CAREER/EMPLOYMENT INFORMATION </h4>
 
@@ -315,9 +311,10 @@
 
 	  </div>
         </div>
-		  </div>
 
-		<div class='span4'>
+        <h6>  </h6>
+
+   	<div id='se'>
 
 	 <div class="cpanel">
             <input type="checkbox"> <i><b> For those who are self-employed </b></i>
@@ -354,10 +351,10 @@
 	</div>
 
 	     </div>
-    		</div>
-				</div>
-					</div>
+    </div>
 </div>
+</div>
+
 
 <!-- - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - -Employment History - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <div id='pop'>
