@@ -82,7 +82,7 @@ class EmploymentHistoryController extends Controller
                 {
                     echo CJSON::encode(array(
                         'status'=>'success', 
-                        'div'=>"successfully added"
+                        'div'=>"Contact successfully added"
                         ));
                     exit;               
                 }

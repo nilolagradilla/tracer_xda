@@ -21,7 +21,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'scholarId'); ?>
-		<?php echo $form->textField($model,'scholarId'); ?>
+		<?php echo $form->textField($model,'scholarId', array('value'=>$scholar_id)); ?>
 		<?php echo $form->error($model,'scholarId'); ?>
 	</div>
 

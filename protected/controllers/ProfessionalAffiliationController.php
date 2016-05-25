@@ -66,17 +66,40 @@ class ProfessionalAffiliationController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		
+		if(isset($_GET['id']))
+		{
+			$scholar_id = $_GET['id'];
+		}	
 
 		if(isset($_POST['ProfessionalAffiliation']))
 		{
 			$model->attributes=$_POST['ProfessionalAffiliation'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+									
+			if($model->save()){
+				//$this->redirect(array('view','id'=>$model->id));
+				if (Yii::app()->request->isAjaxRequest)
+                {
+                    echo CJSON::encode(array(
+                        'status'=>'success', 
+                        'div'=>"Contact successfully added"
+                        ));
+                    exit;               
+                }
+                else
+                    $this->redirect(array('view','id'=>$model->id));
+			}
 		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		
+		if (Yii::app()->request->isAjaxRequest)
+        {
+            echo CJSON::encode(array(
+                'status' => 'failure',
+                'div'=>$this->renderPartial('_form', array('model'=>$model, 'scholar_id'=>$scholar_id) ,true , true)));
+            exit;               
+        }else{
+            $this->render('create',array('model'=>$model,));
+        }
 	}
 
 	/**

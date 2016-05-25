@@ -1,4 +1,3 @@
-
 <?php $this->widget('zii.widgets.grid.CGridView', array(
     'id'=>'employmentHistory-grid',
     'dataProvider'=>$empHist,
@@ -10,13 +9,13 @@
         'companyAddress',
 
         array(
-            'header'=>'Remove',
+            'header'=>'delete',
             'class'=>'bootstrap.widgets.TbButtonColumn',
                         'deleteConfirmation'=>"js:'Do you really want to delete sample: '+$.trim($(this).parent().parent().children(':nth-child(2)').text())+'?'",
-                        'template'=>'{Remove}',
+                        'template'=>'{delete}',
                         'buttons'=>array
                         (
-                            'Remove' => array(
+                            'delete' => array(
                                 'label'=>'Delete Sample',
                                 'url'=>'Yii::app()->createUrl("/employmentHistory/delete/id/$data->id")',
                                 ),
@@ -24,3 +23,4 @@
             ),
     ),
 )); ?>
+

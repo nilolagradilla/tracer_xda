@@ -6,6 +6,7 @@
 		'contactType',
 		'home',
 		'office',
+        
 	 	array(
             'header'=>'delete',
             'class'=>'bootstrap.widgets.TbButtonColumn',

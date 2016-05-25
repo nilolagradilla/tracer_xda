@@ -174,7 +174,7 @@
 <?php echo CHtml::link('ADD', "",  // the link for open the dialog
     array(
         'style'=>'cursor: pointer; text-decoration: underline;',
-        'onclick'=>"js:{addContact(); $('#dialogContact').dialog('open'); }",
+        'onclick'=>"js:{addContact(); $('#dialogContact').dialog('open');}",
         'class'=>'btn btn-success'
 
         ));?>
@@ -364,16 +364,16 @@
 <?php echo CHtml::link('ADD', "",  // the link for open the dialog
     array(
         'style'=>'cursor: pointer; text-decoration: underline;',
-         'onclick'=>"js:{addemploymentHistory(); $('#emphist').dialog('open'); }",
+        'onclick'=>"js:{addEmploymentHistory(); $('#emphist').dialog('open');}", 
         'class'=>'btn btn-success'
 
         ));?>
 
-<div id="employmentHistory-grid">
+        
+
+<div id="grid_employmentHistory">
 	<?php $this->renderPartial('_employmentHistory_grid', array('empHist'=>$empHist)); ?>
 </div>
-
-
  
 <!-- - - - - - - - - - - - - - - -  - - - - - - - - - - - Professional Affiliation- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
@@ -383,12 +383,12 @@
 
     array(
         'style'=>'cursor: pointer; text-decoration: underline;',
-        'onclick'=>"$('#pa').dialog('open');",
+        'onclick'=>"js:{addProfessionalAffiliation(); $('#pa').dialog('open');}",         
         'class'=>'btn btn-success'
 
         ));?>
 
-<div id="professionalAffiliation-grid">
+<div id="grid_professionalAffiliation">
 	<?php $this->renderPartial('_professionalAffiliation_grid', array('profAff'=>$profAff)); ?>
 </div>
 
@@ -402,12 +402,12 @@
 
     array(
         'style'=>'cursor: pointer; text-decoration: underline;',
-        'onclick'=>"$('#rnd').dialog('open');",
+        'onclick'=>"js:{addRndInvolvement(); $('#rnd').dialog('open');}",    
         'class'=>'btn btn-success'
 
         ));?>
 
-<div id="rndInvolvement-grid">
+<div id="grid_rndInvolvement">
 	<?php $this->renderPartial('_rndInvolvement_grid', array('rnd'=>$rnd)); ?>
 </div>
 
@@ -422,12 +422,12 @@
 
     array(
         'style'=>'cursor: pointer; text-decoration: underline;',
-        'onclick'=>"$('#par').dialog('open');",
+        'onclick'=>"js:{addPARreceived(); $('#par').dialog('open');}",   
         'class'=>'btn btn-success'
 
         ));?>
 
-<div id="proAwardsRecognitionReceived-grid">
+<div id="grid_proAwardsRecognitionReceived">
 	<?php $this->renderPartial('_parReceived_grid', array('par'=>$par)); ?>
 </div>
 
@@ -503,67 +503,6 @@
     ),
 ));?> 
 
-<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'professional-affiliation-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-)); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($professionalAffiliation); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($professionalAffiliation,'organizationName'); ?>
-		<?php echo $form->textField($professionalAffiliation,'organizationName',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->error($professionalAffiliation,'organizationName'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($professionalAffiliation,'address'); ?>
-		<?php echo $form->textArea($professionalAffiliation,'address',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($professionalAffiliation,'address'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($professionalAffiliation,'position'); ?>
-		<?php echo $form->textField($professionalAffiliation,'position',array('size'=>60,'maxlength'=>200)); ?>
-		<?php echo $form->error($professionalAffiliation,'position'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($professionalAffiliation,'duration'); ?>
-		<?php echo $form->textField($professionalAffiliation,'duration',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($professionalAffiliation,'duration'); ?>
-	</div>
-
-	<?php
-		echo CHtml::ajaxSubmitButton(
-		    'Submit',
-		    Yii::app()->createUrl('/tracer/addprofessionalAffiliation',array('scholar_id'=>$model->scholarId)),
-		    array(
-		         'update'=>'#professionalAffiliation-grid',
-		        'complete'=>"function(data)
-		        {
-		        	setTimeout(\"$('#pa').dialog('close')\");
-		        }",
-		    ),
-		    array(
-		        'class'=>'btn btn-success',
-		        
-		    )
-		);
-		?>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- form -->
-
 <?php $this->endWidget(); ?>
 <!-- - - - - - -  - - - - - - - - - - - - - - - - - - - RND Involvement - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
@@ -583,67 +522,6 @@
     ),
 ));?> 
 
-<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'rnd-involvement-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-)); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($rndInvolvement); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($rndInvolvement,'fieldTitleResearch'); ?>
-		<?php echo $form->textArea($rndInvolvement,'fieldTitleResearch',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($rndInvolvement,'fieldTitleResearch'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($rndInvolvement,'locationDuration'); ?>
-		<?php echo $form->textArea($rndInvolvement,'locationDuration',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($rndInvolvement,'locationDuration'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($rndInvolvement,'fundSource'); ?>
-		<?php echo $form->textField($rndInvolvement,'fundSource',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->error($rndInvolvement,'fundSource'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($rndInvolvement,'natureOfInvolvement'); ?>
-		<?php echo $form->textField($rndInvolvement,'natureOfInvolvement',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->error($rndInvolvement,'natureOfInvolvement'); ?>
-	</div>
-
-	<?php
-		echo CHtml::ajaxSubmitButton(
-		    'Submit',
-		    Yii::app()->createUrl('/tracer/addrndInvolvement',array('scholar_id'=>$model->scholarId)),
-		    array(
-		         'update'=>'#rndInvolvement-grid',
-		        'complete'=>"function(data)
-		        {
-		        	setTimeout(\"$('#rnd').dialog('close')\");
-		        }",
-		    ),
-		    array(
-		        'class'=>'btn btn-success',
-		        
-		    )
-		);
-		?>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- form -->
-
 <?php $this->endWidget(); ?>
 
 <!-- - - - - - - -  - - - - - - - - - - - - - - - - - - - - - PAR received - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -651,7 +529,7 @@
 <?php $this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
     'id'=>'par',
     'options'=>array(
-        'title'=>'RND Involvement',
+        'title'=>'PAR Received',
         'show'=>array('effect'=>'fadeIn','duration'=>500),
         'hide'=>array('effect'=>'fadeOut','duration'=>500),
         'autoOpen'=>false,
@@ -664,61 +542,6 @@
     ),
 ));?> 
 
-<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'pro-awards-recognition-received-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-)); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($proAwardsRecognitionReceived); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($proAwardsRecognitionReceived,'titleOfAward'); ?>
-		<?php echo $form->textField($proAwardsRecognitionReceived,'titleOfAward',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->error($proAwardsRecognitionReceived,'titleOfAward'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($proAwardsRecognitionReceived,'dateGiven'); ?>
-		<?php echo $form->textField($proAwardsRecognitionReceived,'dateGiven'); ?>
-		<?php echo $form->error($proAwardsRecognitionReceived,'dateGiven'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($proAwardsRecognitionReceived,'awardingBody'); ?>
-		<?php echo $form->textField($proAwardsRecognitionReceived,'awardingBody',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->error($proAwardsRecognitionReceived,'awardingBody'); ?>
-	</div>
-
-	<?php
-		echo CHtml::ajaxSubmitButton(
-		    'Submit',
-		    Yii::app()->createUrl('/tracer/addparReceived',array('scholar_id'=>$model->scholarId)),
-		    array(
-		         'update'=>'#proAwardsRecognitionReceived-grid',
-		        'complete'=>"function(data)
-		        {
-		        	setTimeout(\"$('#par').dialog('close')\");
-		        }",
-		    ),
-		    array(
-		        'class'=>'btn btn-success',
-		        
-		    )
-		);
-		?>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- form -->
-
 <?php $this->endWidget(); ?>
 
 
@@ -727,7 +550,7 @@
 function addContact()
 {
 	<?php echo CHtml::ajax(array(
-			'url'=>$this->createUrl('contact/create',array('id'=>1)),
+			'url'=>$this->createUrl('contact/create',array('id'=>$model->scholarId)),
 			'data'=> "js:$(this).serialize()",
             'type'=>'post',
             'dataType'=>'json',
@@ -756,18 +579,18 @@ function addContact()
 			 'error'=>"function(request, status, error){
 				 	$('#dialogContact').html(status+'('+error+')'+': '+ request.responseText );
 					}",
+				
 			
             ))?>;
     return false; 
 }
-
 </script>
 
 <script type="text/javascript">
-function addemploymentHistory()
+function addEmploymentHistory()
 {
 	<?php echo CHtml::ajax(array(
-			'url'=>$this->createUrl('employmentHistory/create',array('id'=>1)),
+			'url'=>$this->createUrl('employmentHistory/create',array('id'=>$model->scholarId)),
 			'data'=> "js:$(this).serialize()",
             'type'=>'post',
             'dataType'=>'json',
@@ -777,7 +600,7 @@ function addemploymentHistory()
                 {
                     $('#emphist').html(data.div);
                     // Here is the trick: on submit-> once again this function!
-                    $('#emphist form').submit(addemploymentHistory);
+                    $('#emphist form').submit(addEmploymentHistory);
                 }
                 else
                 {
@@ -796,9 +619,134 @@ function addemploymentHistory()
 			 'error'=>"function(request, status, error){
 				 	$('#emphist').html(status+'('+error+')'+': '+ request.responseText );
 					}",
+				
 			
             ))?>;
     return false; 
 }
-
 </script>
+
+<script type="text/javascript">
+function addProfessionalAffiliation()
+{
+	<?php echo CHtml::ajax(array(
+			'url'=>$this->createUrl('professionalAffiliation/create',array('id'=>$model->scholarId)),
+			'data'=> "js:$(this).serialize()",
+            'type'=>'post',
+            'dataType'=>'json',
+            'success'=>"function(data)
+            {
+                if (data.status == 'failure')
+                {
+                    $('#pa').html(data.div);
+                    // Here is the trick: on submit-> once again this function!
+                    $('#pa form').submit(addProfessionalAffiliation);
+                }
+                else
+                {
+                    $.fn.yiiGridView.update('professionalAffiliation-grid');
+					$('#pa').html(data.div);
+                    setTimeout(\"$('#pa').dialog('close') \",1000);
+					
+                }
+ 
+            }",
+			'beforeSend'=>'function(jqXHR, settings){
+                    $("#pa").html(
+						\'<div class="loader"><br\><br\>Generating form.<br\> Please wait...</div>\'
+					);
+             }',
+			 'error'=>"function(request, status, error){
+				 	$('#pa').html(status+'('+error+')'+': '+ request.responseText );
+					}",
+				
+			
+            ))?>;
+    return false; 
+}
+</script>
+
+<script type="text/javascript">
+function addRndInvolvement()
+{
+	<?php echo CHtml::ajax(array(
+			'url'=>$this->createUrl('rndInvolvement/create',array('id'=>$model->scholarId)),
+			'data'=> "js:$(this).serialize()",
+            'type'=>'post',
+            'dataType'=>'json',
+            'success'=>"function(data)
+            {
+                if (data.status == 'failure')
+                {
+                    $('#rnd').html(data.div);
+                    // Here is the trick: on submit-> once again this function!
+                    $('#rnd form').submit(addRndInvolvement);
+                }
+                else
+                {
+                    $.fn.yiiGridView.update('rndInvolvement-grid');
+					$('#rnd').html(data.div);
+                    setTimeout(\"$('#rnd').dialog('close') \",1000);
+					
+                }
+ 
+            }",
+			'beforeSend'=>'function(jqXHR, settings){
+                    $("#rnd").html(
+						\'<div class="loader"><br\><br\>Generating form.<br\> Please wait...</div>\'
+					);
+             }',
+			 'error'=>"function(request, status, error){
+				 	$('#rnd').html(status+'('+error+')'+': '+ request.responseText );
+					}",
+				
+			
+            ))?>;
+    return false; 
+}
+</script>
+
+<script type="text/javascript">
+function addPARreceived()
+{
+	<?php echo CHtml::ajax(array(
+			'url'=>$this->createUrl('proAwardsRecognitionReceived/create',array('id'=>$model->scholarId)),
+			'data'=> "js:$(this).serialize()",
+            'type'=>'post',
+            'dataType'=>'json',
+            'success'=>"function(data)
+            {
+                if (data.status == 'failure')
+                {
+                    $('#par').html(data.div);
+                    // Here is the trick: on submit-> once again this function!
+                    $('#par form').submit(addPARreceived);
+                }
+                else
+                {
+                    $.fn.yiiGridView.update('proAwardsRecognitionReceived-grid');
+					$('#par').html(data.div);
+                    setTimeout(\"$('#par').dialog('close') \",1000);
+					
+                }
+ 
+            }",
+			'beforeSend'=>'function(jqXHR, settings){
+                    $("#par").html(
+						\'<div class="loader"><br\><br\>Generating form.<br\> Please wait...</div>\'
+					);
+             }',
+			 'error'=>"function(request, status, error){
+				 	$('#par').html(status+'('+error+')'+': '+ request.responseText );
+					}",
+				
+			
+            ))?>;
+    return false; 
+}
+</script>
+
+
+
+
+
